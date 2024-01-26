@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Candidature;
 use Exception;
 use App\Models\User;
 use App\Models\Profession;
@@ -150,5 +151,26 @@ class OffreEmploiController extends Controller
             return response()->json($e);
 
             }
+    }
+
+    public function RecherCandidatureParOffre(OffreEmploi $OffreEmploi)
+    {
+        // Récupérer la catégorie en fonction de l'id
+        $OffreEmploi = OffreEmploi::where('id', $OffreEmploi->id)->first();
+
+        if ($OffreEmploi) {
+            // Récupérer les annonces liées à la catégorie
+            $candidature = Candidature::where('offre_emploi_id', $OffreEmploi->id)->get();
+
+            return response()->json([
+                "status_code"=>200,
+                "data"=> $candidature,
+            ]);
+        } else {
+            return response()->json([
+                'statut' => 'Erreur',
+                'message' => 'User non trouvée',
+            ], 404);
+        }
     }
 }

@@ -167,18 +167,6 @@ class ApiGestionUserController extends Controller
 
     
     public function deactivateCompte($id)
-    // {
-    //     $user = User::find($id);
-
-    //     if ($user) {
-    //         $user->update(['statut' => 'deactive']);
-
-    //         return response()->json(['message' => 'Compte désactivé avec succès'], 200);
-
-    //     }else {
-    //         return response()->json(['message' => 'Utilisateur non trouvé'], 404);
-    //     }
-    // }
     {
         $user = User::find($id);
 
@@ -192,4 +180,16 @@ class ApiGestionUserController extends Controller
             return response()->json(['message' => 'Utilisateur non trouvé'], 404);
         }
     }
+
+//     public function search(Request $request)
+// {
+//     $q = $request->input('q');
+//     dd( $q );
+//     $results = User::where('nom', 'LIKE', '%'.$q.'%')
+//                      ->orWhere('prenom', 'LIKE', '%'.$q.'%')
+//                      ->get();
+// // dd($results);
+//     return response()->json($results);
+// }
+
 }

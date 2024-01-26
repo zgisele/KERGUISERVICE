@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profession;
-use Illuminate\Http\Request;
 use Exception;
+use App\Models\User;
+use App\Models\Profession;
+use App\Models\OffreEmploi;
+use Illuminate\Http\Request;
 
 class ProfessionController extends Controller
 {
@@ -131,5 +133,49 @@ class ProfessionController extends Controller
 
             }
     }
-    
+
+
+
+
+    public function RecherUserParProfession(Profession  $profession)
+    {
+        // Récupérer la catégorie en fonction de l'id
+        $profession = Profession::where('id', $profession->id)->first();
+
+        if ($profession) {
+            // Récupérer les annonces liées à la catégorie
+            $user = User::where('profession_id', $profession->id)->get();
+
+            return response()->json([
+                "status_code"=>200,
+                "data"=> $user,
+            ]);
+        } else {
+            return response()->json([
+                'statut' => 'Erreur',
+                'message' => 'User non trouvée',
+            ], 404);
+        }
+    }
+
+    public function RecherOffreEmploiParProfession(Profession  $profession)
+    {
+        // Récupérer la catégorie en fonction de l'id
+        $profession=  Profession::where('id',  $profession->id)->first();
+
+        if ( $profession) {
+            // Récupérer les annonces liées à la catégorie
+            $OffreEmploi = OffreEmploi::where('profession_id',$profession->id)->get();
+
+            return response()->json([
+                "status_code"=>200,
+                "data"=> $OffreEmploi,
+            ]);
+        } else {
+            return response()->json([
+                'statut' => 'Erreur',
+                'message' => 'User non trouvée',
+            ], 404);
+        }
+    }
 }

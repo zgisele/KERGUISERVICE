@@ -10,14 +10,16 @@ use Illuminate\Notifications\Notification;
 class RejetteCandidature extends Notification
 {
     use Queueable;
+    public $prenomCandidat;
     public $nomCandidat;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($nomCandidat)
+    public function __construct( $prenomCandidat,$nomCandidat)
     {
         //
+        $this->prenomCandidat = $prenomCandidat;
         $this->nomCandidat = $nomCandidat;
     }
 
@@ -37,7 +39,7 @@ class RejetteCandidature extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('Bonjour '. $this->nomCandidat . '!')
+                    ->line('Bonjour '.$this->prenomCandidat.' '. $this->nomCandidat . '!')
                     ->line('Nous vous informons que votres candidature n\'a pas ete retenu.')
                     ->line('Nous vous encourageons a postuler d\'avantage .Nous sommes certain que vous touvez l\'emploi qui vous convient')
                     ->line('Cordialement, L\'equipe KER GUI SERVICE.');

@@ -13,9 +13,10 @@ class AccepteCandidature extends Notification
     use Queueable;
     
     
+    public $prenomCandidat;
     public $nomCandidat;
-    public $nomEmployeur;
     public $prenomEmployeur;
+    public $nomEmployeur;
     public $emailEmployeur;
     public $telephoneEmployeur;
     
@@ -23,14 +24,15 @@ class AccepteCandidature extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct($nomCandidat,$nomEmployeur,$prenomEmployeur,$emailEmployeur,$telephoneEmployeur)
+    public function __construct($prenomCandidat,$nomCandidat,$prenomEmployeur,$nomEmployeur,$emailEmployeur,$telephoneEmployeur)
     
     {
         // ($userMail->prenom,$employeur->nom,$employeur->prenom,$employeur->email,$employeur->telephone)
         
+        $this->prenomCandidat = $prenomCandidat;
         $this->nomCandidat = $nomCandidat;
-        $this->nomEmployeur = $nomEmployeur;
         $this->prenomEmployeur = $prenomEmployeur;
+        $this->nomEmployeur = $nomEmployeur;
         $this->emailEmployeur = $emailEmployeur;
         $this->telephoneEmployeur = $telephoneEmployeur;
         // $this->dateEmbauche = $dateEmbauche;
@@ -57,12 +59,12 @@ class AccepteCandidature extends Notification
        
 
         return (new MailMessage)
-                    ->line('Bonjour ' . $this->nomCandidat . '!')
+                    ->line('Bonjour ' . $this->prenomCandidat .'  '. $this->nomCandidat. '!')
                     ->line('Nous sommes heureux de vous informer que votres candidature a ete valider.')
                     ->line('Vous devez donc passer a l\'etape suivante qui est l\'entretien .La date de l\'entretien  est prévue pour le ' .$dateEmbauche . '.')
                     ->line('Vous pouvez consulter les information de votre employeur ci-dessous.')
-                    ->line('nom:'. $this->nomEmployeur . ',')
                     ->line('prenom:'.$this->prenomEmployeur. ',')
+                    ->line('nom:'. $this->nomEmployeur . ',')
                     ->line('email:'.$this->emailEmployeur. ',')
                     ->line('telephone:'.$this->telephoneEmployeur. ',')
                     ->line('Cordialement, L\'equipe KER GUI SERVICE.');

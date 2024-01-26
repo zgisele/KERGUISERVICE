@@ -34,6 +34,7 @@ Route::post("login", [ApiController::class, "login"]);
 
 
 
+
 Route::group(["middleware" => ["auth:api"],], function(){
 
     Route::get("profile", [ApiController::class, "profile"]);
@@ -52,6 +53,8 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
     Route::post('user/modificationAdmin',[ApiGestionUserController::class, 'updateAmin']);
     Route::get('user/VoirEnsembleUser',[ApiGestionUserController::class, 'listeUser']);
     Route::put('user/deactivateCompteUser/{id}',[ApiGestionUserController::class, 'deactivateCompte']);
+    Route::get('chercheUsersParProfession/{profession}', [ProfessionController::class, 'RecherUserParProfession']);
+    Route::get('chercheOffreParProfession/{profession}', [ProfessionController::class, 'RecherOffreEmploiParProfession']);
 
 });
 
@@ -62,6 +65,8 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
         Route::post("AjoutOffreEmploi", [OffreEmploiController::class, "store"]);
         Route::put('OffreEmploi/edit/{OffreEmploi}', [OffreEmploiController::class, 'update']);
         Route::delete('OffreEmploi/delete/{OffreEmploi}',[OffreEmploiController::class, 'destroy']);
+        Route::get('chercheCandidatureParOffre/{OffreEmploi}', [OffreEmploiController::class, 'RecherCandidatureParOffre']);
+       
 
         Route::get('AfichageCandidature',[CandidatureController::class,'show']);
         Route::put('ModifierAfichageCandidature/{candidature}', [CandidatureController::class, 'updateEtatCan']);
@@ -72,6 +77,9 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
 
         Route::post("AjoutEvaluation", [EvaluationController::class, "store"]);
         Route::get("ListeEvaluation", [EvaluationController::class, "show"]);
+        Route::delete("SupprimerEvaluation/{evaluation}", [EvaluationController::class, "destroy"]);
+
+       
 
     });
 

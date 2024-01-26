@@ -85,5 +85,21 @@ class EvaluationController extends Controller
     public function destroy(Evaluation $evaluation)
     {
         //
-    }
+            try{    
+                // $evaluation = Evaluation::findOrFail($id);
+               
+                $evaluation->delete();
+    
+                return response()->json([
+                    "status_code"=>200,
+                    "status_messages"=>"Le commentaire  a ete Supprimé",
+                    "data"=>$evaluation
+                    ]);
+    
+                }catch(Exception $e){
+        
+                return response()->json($e);
+    
+                }
+    }   
 }

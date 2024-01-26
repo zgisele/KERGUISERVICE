@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Candidature;
 use App\Models\OffreEmploi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Notifications\AccepteCandidature;
-use App\Notifications\RejetteCandidature;
-use App\Http\Controllers\OffreEmploiController;
+use App\Mail\AccepteCandidature;
+use App\Mail\RejetteCandidature;
 use PhpParser\Node\Stmt\ElseIf_;
+// use App\Notifications\AccepteCandidature;
+// use App\Notifications\RejetteCandidature;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\OffreEmploiController;
 
 class CandidatureController extends Controller
 {
@@ -40,44 +44,11 @@ class CandidatureController extends Controller
     {
         //
         try {
-            // $request->validate([
-            // "dateSoum"=>"required",
-            // ]);
             $candidature = new Candidature();
-            // $candidature->dateSoum = $request->dateSoum;
             $candidature->dateSoum = now();
             $candidature->user_id=auth()->user()->id;
             $candidature->offre_emploi_id=$offre_emploi_id;
-            //  dd($candidature);
             $candidature->save();
-
-            // dd('avant if');
-            if($candidature->etatCan==="accepter"){
-                // dd('dans if');
-                $userMail= User::find(auth()->user()->id); // Remplacez ceci par votre propre logique pour récupérer l'employé
-                $candidature = Candidature::find($candidature->id);
-                // Récupérer l'offre d'emploi associée à la candidature
-                $offreEmploi = OffreEmploi::find($candidature->offre_emploi_id);
-                // Récupérer l'employeur associé à l'offre d'emploi
-                $employeur = User::find($offreEmploi->user_id);
-                $userMail->notify(new AccepteCandidature($userMail->prenom,$employeur->nom,$employeur->prenom,$employeur->email,$employeur->telephone));
-            
-            }elseif($candidature->etatCan==="rejeter"){
-                // dd('dans else if');
-                $userMail= User::find(auth()->user()->id);
-                $userMail->notify(new RejetteCandidature($userMail->prenom));
-            }
-            // dd('dehor');
-
-            // if($candidature->status="accepter"){
-            //     $userMail=User::find($user->id);
-            //     $userMail->notify(new AccepteCandidature());
-            //     // $table->enum('etatCan',['attente','accepter','rejeter']);
-            // }
-            return response()->json([
-                "status" => true,
-                "message" => "Votre candidature a été enregistrer avec succes"
-            ]);
         }catch(Exception $e){
 
             return response()->json($e);
@@ -181,26 +152,6 @@ class CandidatureController extends Controller
     
     }
 
-    // public function updateEtatCan(Request $request)
-    // {
-    // // Valider la requête si nécessaire
-    //     $request->validate([
-    //     // 'nouvel_etatCan' => 'required',
-    //     'candidatures.etatCan' => 'required',
-    //     ]);
-
-    //     // Récupérer la nouvelle valeur pour etatCan depuis la requête
-    //     $nouvelEtatCan = $request->input('candidatures.etatCan');
-    //     dd($nouvelEtatCan );
-    //     // Mettre à jour toutes les candidatures avec la nouvelle valeur etatCan
-    //     Candidature::join('users', 'candidatures.user_id', '=', 'users.id')
-    //         ->join('professions', 'users.profession_id', '=', 'professions.id')
-    //         ->update(['candidatures.etatCan' => $nouvelEtatCan]);
-
-    //     return response()->json(['message' => 'Candidatures mises à jour avec succès']);
-    // }
-
-
     /**
      * Update the specified resource in storage.
      */
@@ -232,32 +183,55 @@ class CandidatureController extends Controller
             // Mettre à jour la candidature avec la nouvelle valeur etatCan
             $candidature->update(['etatCan' => $nouvelEtatCan]);
 
-            if($candidature->etatCan==="accepter"){
+            // foreach ($candidatures as $candidature) {
 
-                // dd('dans if');
-                return response()->json(['message' => 'La Candidature a ete accepter']);
-                $userMail= User::find(auth()->user()->id); // Remplacez ceci par votre propre logique pour récupérer l'employé
-                $candidature = Candidature::find($candidature->id);
-                // Récupérer l'offre d'emploi associée à la candidature
-                $offreEmploi = OffreEmploi::find($candidature->offre_emploi_id);
-                // Récupérer l'employeur associé à l'offre d'emploi
-                $employeur = User::find($offreEmploi->user_id);
-                $userMail->notify(new AccepteCandidature($userMail->prenom,$employeur->nom,$employeur->prenom,$employeur->email,$employeur->telephone));
-            
-            }elseif($candidature->etatCan==="rejeter"){
-                // dd('dans else if');
-                return response()->json(['message' => ' La Candidature a ete rejeter']);
-                $userMail= User::find(auth()->user()->id);
-                $userMail->notify(new RejetteCandidature($userMail->prenom));
-                
-            }
-            return response()->json(['message' => 'Candidature mise à jour avec succès']);
 
+
+                    if($candidature->etatCan==="accepter"){
+
+                        // dd('dans if');
+                        
+                        // $userMail= User::find(auth()->user()->id); // Remplacez ceci par votre propre logique pour récupérer l'employé
+                      
+                        $candidature = Candidature::find($candidature->id);
+                        // $candidat= User::find($candidature->user_id);
+                        $candidat= User::where('id',$candidature->user_id)->first();
+                        // Récupérer l'offre d'emploi associée à la candidature
+                        $offreEmploi = OffreEmploi::find($candidature->offre_emploi_id);
+                        // Récupérer l'employeur associé à l'offre d'emploi
+                        // $employeur = User::find($offreEmploi->user_id);
+                        $employeur = User::where('id',$offreEmploi->user_id)->first();
+                        // $candidat->notify(new AccepteCandidature($candidat->prenom,$candidat->nom,$employeur->prenom,$employeur->nom,$employeur->email,$employeur->telephone));
+                        $dateEmbauche=Carbon::now()->addWeek()->format('Y-m-d');
+                        Mail::to($candidat->email)->send(new AccepteCandidature($candidat,$employeur,$dateEmbauche));
+                        return response()->json(['message' => 'La Candidature a ete accepter']);
+                    
+                    }elseif($candidature->etatCan==="rejeter"){
+                       
+                        $candidature = Candidature::find($candidature->id);
+                        $candidat= User::where('id',$candidature->user_id)->first();
+                        // dd($candidat);
+                        // $candidat->notify(new RejetteCandidature($candidat->prenom,$candidat->nom));
+                        Mail::to($candidat->email)->send(new RejetteCandidature($candidat));
+                        return response()->json(['message' => ' La Candidature a ete rejeter']);
+
+                        
+                        
+                    }
+
+                return response()->json(['message' => 'Candidature mise à jour avec succès']);
+
+            // }
         }catch(Exception $e){
 
             return response()->json($e);
         }
+        
     }
+
+
+
+
 
     public function SupprimerCandidature(Candidature $candidature)
     {
