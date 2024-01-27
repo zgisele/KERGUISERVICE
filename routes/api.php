@@ -89,19 +89,15 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
 
         Route::get('listeCandidature',[CandidatureController::class,'liste']);
         Route::post("AjoutCandidature/{offre_emploi_id}", [CandidatureController::class, "store"]);
-        // Route::put('Candidature/edit/{Candidature}',[CandidatureController::class, 'update']);
-        Route::delete('Candidature/delete/{Candidature}',[CandidatureController::class, 'destroy']);
-
         Route::post('user/modificationProfil',[ApiGestionUserController::class, 'updateCandidat']);
     });
 
+     // Route::put('Candidature/edit/{Candidature}',[CandidatureController::class, 'update']);
+     Route::delete('Candidature/delete/{Candidature}',[CandidatureController::class, 'destroy']);
 
 
-// Route::group(['middleware' => 'CompteActive'], function () {
-//     // Les routes protégées ici nécessiteront également que l'utilisateur soit actif
-//     Route::get('/dashboard', 'DashboardController@index');
-//     // ...
-// });
+
+
 
 
 
