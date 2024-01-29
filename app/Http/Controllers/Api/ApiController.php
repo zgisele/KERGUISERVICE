@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+// use auth;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -195,13 +196,16 @@ class ApiController extends Controller
         ]);
 
         // dd($token);
+        $userdata = auth()->user();
 
         if(!empty($token)){
 
             return response()->json([
                 "status" => true,
                 "message" => "User logged in succcessfully",
-                "token" => $token
+                "token" => $token,
+                "data" => $userdata
+                
             ]);
         }
 
