@@ -202,7 +202,7 @@ class ApiController extends Controller
 
             return response()->json([
                 "status" => true,
-                "message" => "User logged in succcessfully",
+                "message" => "connexion reussi",
                 "token" => $token,
                 "data" => $userdata
                 

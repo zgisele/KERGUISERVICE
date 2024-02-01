@@ -27,34 +27,35 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::post("register", [ApiController::class, "register"]);
-Route::post("regiserEmployeur", [ApiController::class, "register_Employeur"]);
-Route::post("regiserAdmin", [ApiController::class, "register_Admin"]);
-Route::post("login", [ApiController::class, "login"]);
+Route::post("register", [ApiController::class, "register"]);//T
+Route::post("regiserEmployeur", [ApiController::class, "register_Employeur"]);//T
+Route::post("regiserAdmin", [ApiController::class, "register_Admin"]);//T
+Route::post("login", [ApiController::class, "login"]);//T
 
 
 
 
 Route::group(["middleware" => ["auth:api"],], function(){
 
-    Route::get("profile", [ApiController::class, "profile"]);
+    Route::get("profile", [ApiController::class, "profile"]);//T
     Route::get("refresh", [ApiController::class, "refreshToken"]);
-    Route::get("logout", [ApiController::class, "logout"]);
+    Route::get("logout", [ApiController::class, "logout"]);//T
 });
 
 
 
 Route::middleware(['auth:api','UserAdmin'])->group( function(){
     Route::get('listeProfession',[ProfessionController::class,'liste']);
-    Route::post("AjoutProfession", [ProfessionController::class, "store"]);
+    Route::post("AjoutProfession", [ProfessionController::class, "store"]);//T
     Route::put('profession/edit/{profession}', [ProfessionController::class, 'update']);
     Route::delete('profession/delete/{id}',[ProfessionController::class, 'delete']);
 
-    Route::post('user/modificationAdmin',[ApiGestionUserController::class, 'updateAmin']);
-    Route::get('user/VoirEnsembleUser',[ApiGestionUserController::class, 'listeUser']);
-    Route::put('user/deactivateCompteUser/{id}',[ApiGestionUserController::class, 'deactivateCompte']);
+    Route::post('user/modificationAdmin',[ApiGestionUserController::class, 'updateAmin']);//T
+    Route::get('user/VoirEnsembleUser',[ApiGestionUserController::class, 'listeUser']);//T
+    Route::put('user/deactivateCompteUser/{id}',[ApiGestionUserController::class, 'deactivateCompte']);//T
     Route::get('chercheUsersParProfession/{profession}', [ProfessionController::class, 'RecherUserParProfession']);
     Route::get('chercheOffreParProfession/{profession}', [ProfessionController::class, 'RecherOffreEmploiParProfession']);
+    Route::get('chercheOffreParUser/{user}', [ApiGestionUserController::class, 'RecherOffreParUser']);
 
 });
 
@@ -72,8 +73,8 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
         Route::put('ModifierAfichageCandidature/{candidature}', [CandidatureController::class, 'updateEtatCan']);
         Route::delete('SuppressionCandidature/{candidature}', [CandidatureController::class, 'SupprimerCandidature']);
 
-        Route::post('user/modificationProfilEmployeur',[ApiGestionUserController::class, 'updateEmployeur']);
-        Route::get('user/VoirProfilDesCandidat',[ApiGestionUserController::class, 'ProfilDesCandidat']);
+        Route::post('user/modificationProfilEmployeur',[ApiGestionUserController::class, 'updateEmployeur']);//T
+        Route::get('user/VoirProfilDesCandidat',[ApiGestionUserController::class, 'ProfilDesCandidat']);//T
 
         Route::post("AjoutEvaluation", [EvaluationController::class, "store"]);
         Route::get("ListeEvaluation", [EvaluationController::class, "show"]);
@@ -89,7 +90,7 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
 
         Route::get('listeCandidature',[CandidatureController::class,'liste']);
         Route::post("AjoutCandidature/{offre_emploi_id}", [CandidatureController::class, "store"]);
-        Route::post('user/modificationProfil',[ApiGestionUserController::class, 'updateCandidat']);
+        Route::post('user/modificationProfil',[ApiGestionUserController::class, 'updateCandidat']);//T
     });
 
      // Route::put('Candidature/edit/{Candidature}',[CandidatureController::class, 'update']);

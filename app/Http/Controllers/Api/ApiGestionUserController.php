@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 use Exception;
 use App\Models\User;
+use App\Models\OffreEmploi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -44,7 +45,7 @@ class ApiGestionUserController extends Controller
             // "email"=>"required|email|unique:users",
             "password"=>"required",
             "telephone"=>"required",
-            "presentation"=>"required",
+            "presentation"=>"required", 
             "langueParler"=>"required",
             "civilite"=>"required",
             "experienceProf"=>"required",
@@ -191,5 +192,26 @@ class ApiGestionUserController extends Controller
 // // dd($results);
 //     return response()->json($results);
 // }
+
+public function RecherOffreParUser(User $user)
+{
+    // Récupérer la catégorie en fonction de l'id
+    $user = User ::where('id', $user->id)->first();
+
+    if ($user) {
+        // Récu$userpérer les annonces liées à la catégorie
+        $OffreEmploi = OffreEmploi::where('user_id', $user->id)->get();
+
+        return response()->json([
+            "status_code"=>200,
+            "data"=> $OffreEmploi,
+        ]);
+    } else {
+        return response()->json([
+            'statut' => 'Erreur',
+            'message' => 'offre non trouver',
+        ], 404);
+    }
+}
 
 }

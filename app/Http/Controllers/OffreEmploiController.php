@@ -25,7 +25,7 @@ class OffreEmploiController extends Controller
             return response()->json([
                 "status_code"=>200,
                 "status_messages"=>"Liste des offres d'emploi",
-                "data"=>Profession::all()
+                "data"=>OffreEmploi::all()
             ]);
         }catch(Exception $e){
 
@@ -173,4 +173,27 @@ class OffreEmploiController extends Controller
             ], 404);
         }
     }
+
+   
+
+    // public function RecherOffreParUser(OffreEmploi $OffreEmploi)
+    // {
+    //     // Récupérer la catégorie en fonction de l'id
+    //     $OffreEmploi = OffreEmploi ::where('id', $OffreEmploi->id)->first();
+
+    //     if ($OffreEmploi) {
+    //         // Récu$userpérer les annonces liées à la catégorie
+    //         $user = User::where('user_id', $OffreEmploi->id)->get();
+
+    //         return response()->json([
+    //             "status_code"=>200,
+    //             "data"=> $user,
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'statut' => 'Erreur',
+    //             'message' => 'offre non trouver',
+    //         ], 404);
+    //     }
+    // }
 }
