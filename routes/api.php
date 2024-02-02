@@ -55,6 +55,7 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
     Route::put('user/deactivateCompteUser/{id}',[ApiGestionUserController::class, 'deactivateCompte']);//T
     Route::get('chercheUsersParProfession/{profession}', [ProfessionController::class, 'RecherUserParProfession']);//T
     Route::get('chercheOffreParProfession/{profession}', [ProfessionController::class, 'RecherOffreEmploiParProfession']);//T
+    Route::put('offres-emploi/{offreEmploi}', [OffreEmploiController::class, 'archiver']);
    
 });
 

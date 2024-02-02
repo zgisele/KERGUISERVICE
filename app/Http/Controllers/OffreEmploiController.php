@@ -174,5 +174,33 @@ class OffreEmploiController extends Controller
         }
     }
 
-    // $table->enum('etat',['nouveau','invalide','archiver']);
+    
+    public function archiver(OffreEmploi $offreEmploi)
+    {
+        try {
+            // Vérifie si l'offre d'emploi n'est pas déjà archivée
+            if ($offreEmploi->etat !== 'archiver') {
+                // Met à jour l'état de l'offre d'emploi à "archiver"
+                $offreEmploi->update(['etat' => 'archiver']);
+
+                return response()->json([
+                    "status_code" => 200,
+                    "status_messages" => "L'offre d'emploi a été archivée avec succès",
+                    "data" => $offreEmploi
+                ]);
+            } else {
+                return response()->json([
+                    "status_code" => 200,
+                    "status_messages" => "L'offre d'emploi est déjà archivée",
+                    "data" => $offreEmploi
+                ]);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                "status_code" => 500,
+                "status_messages" => "Erreur lors de l'archivage de l'offre d'emploi",
+                "error" => $e->getMessage()
+            ]);
+        }
+    }
 }
