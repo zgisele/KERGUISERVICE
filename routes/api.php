@@ -99,6 +99,7 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
 
     Route::get('listeOffreEmploi',[OffreEmploiController::class,'liste']);//T
     Route::get('listeProfession',[ProfessionController::class,'liste']);//T
+    Route::get('listeDesCandidats',[ApiGestionUserController::class,'listeCandidats']);
 
      // Route::put('Candidature/edit/{Candidature}',[CandidatureController::class, 'update']);
      Route::delete('Candidature/delete/{Candidature}',[CandidatureController::class, 'destroy']);
