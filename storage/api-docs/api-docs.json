@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Your API Title",
+        "title": "Ker gui service",
         "description": "Your API Description",
         "version": "1.0.0"
     },
@@ -188,6 +188,51 @@
                 },
                 "tags": [
                     "Gestions commentaire"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/listeCandidatureDeChaqueCandidat": {
+            "get": {
+                "summary": "Liste candidature  pour candidat",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Gestion candidature"
                 ],
                 "parameters": [
                     {
@@ -426,6 +471,123 @@
                         "type": "string"
                     }
                 ]
+            }
+        },
+        "/api/offres-emploi/{offreEmploi}": {
+            "put": {
+                "summary": "Archiver offre d'emploi",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Gestion Offre Emploi"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "offreEmploi",
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/chercheOffreParUser/{user}": {
+            "get": {
+                "summary": "Rechercher offre d'emploi par User",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Gestion Offre Emploi"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "user",
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "": ""
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/chercheCandidatureParOffre/{OffreEmploi}": {
@@ -748,12 +910,12 @@
                                 }
                             },
                             "example": {
-                                "typeContrat": "offre 5",
+                                "typeContrat": "offre 4",
                                 "lieu": "Dakar",
                                 "description": "recherche d'un TOUT",
                                 "experienceMinimum": "1 ans experieces",
                                 "slaireMinimum": "30 000 fcfa",
-                                "profession_id": "5"
+                                "profession_id": "4"
                             }
                         }
                     }
@@ -1107,8 +1269,70 @@
                                 }
                             },
                             "example": {
-                                "nom_prof": "Nounou",
+                                "nom_prof": "Bonne",
                                 "description": "soyer active"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/listeDesCandidats": {
+            "get": {
+                "summary": "Liste des Candidats",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Gestion User "
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "": ""
                             }
                         }
                     }
@@ -1795,7 +2019,7 @@
                                 }
                             },
                             "example": {
-                                "email": "anselme@gmail.com",
+                                "email": "alphonsine@gmail.com",
                                 "password": "passer"
                             }
                         }
@@ -2113,22 +2337,22 @@
                                 }
                             },
                             "example": {
-                                "nom": "NONFODJI",
-                                "prenom": "nadege",
+                                "nom": "Alidedji",
+                                "prenom": "Alphosine",
                                 "imageDeProfil": {
                                     "type": "string",
                                     "format": "binary"
                                 },
-                                "email": "nadege@gmail.com",
+                                "email": "alphonsine@gmail.com",
                                 "password": "passer",
-                                "telephone": "785522114",
+                                "telephone": "785922114",
                                 "presentation": "Bienvenu",
                                 "langueParler": "Francais",
                                 "civilite": "femme",
                                 "experienceProf": "licence",
                                 "dateNaissance": "2000-02-14",
                                 "lieu": "dakar",
-                                "profession_id": "1",
+                                "profession_id": "2",
                                 "password_confirmation": "passer"
                             }
                         }

@@ -101,7 +101,7 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
     Route::get('listeDesCandidats',[ApiGestionUserController::class,'listeCandidats']);//T
 
      // Route::put('Candidature/edit/{Candidature}',[CandidatureController::class, 'update']);
-     Route::delete('Candidature/delete/{Candidature}',[CandidatureController::class, 'destroy']);
+    //  Route::delete('Candidature/delete/{Candidature}',[CandidatureController::class, 'destroy']);
 
 
 
