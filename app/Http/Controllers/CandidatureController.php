@@ -49,6 +49,13 @@ class CandidatureController extends Controller
             $candidature->user_id=auth()->user()->id;
             $candidature->offre_emploi_id=$offre_emploi_id;
             $candidature->save();
+
+            return response()->json([
+                'status_code' => 200,
+                'status_messages' => 'Candidatures enregistre avec succès',
+                
+            ]);
+
         }catch(Exception $e){
 
             return response()->json($e);
@@ -64,22 +71,6 @@ class CandidatureController extends Controller
         // $candidaturesUsers= Candidature::with('user')
         // ->select('candidatures.dateSoum', 'candidatures.etatCan', 'users.nom')
         // ->get();
-
-        // $candidaturesUsers = Candidature::join('users', 'candidatures.user_id', '=', 'users.id')
-        //     ->select('candidatures.dateSoum',
-        //     'candidatures.etatCan',
-        //     'users.nom',
-        //     'users.prenom',
-        //     'users.email',
-        //     'users.telephone',
-        //     'users.presentation',
-        //     'users.langueParler',
-        //     'users.civilite',
-        //     'users.experienceProf',
-        //     'users.lieu')
-        //     ->get();
-
-
 
         $candidaturesUsers = Candidature::join('users', 'candidatures.user_id', '=', 'users.id')
             ->join('professions', 'users.profession_id', '=', 'professions.id')
@@ -230,9 +221,6 @@ class CandidatureController extends Controller
     }
 
 
-
-
-
     public function SupprimerCandidature(Candidature $candidature)
     {
         try{    
@@ -252,4 +240,40 @@ class CandidatureController extends Controller
 
             }
     }
+
+    public function ListeCandidatureDeChaqueCandidat()
+    {
+        // Récupérez l'utilisateur actuellement authentifié
+        $utilisateur = Auth::user();
+
+        // Assurez-vous que l'utilisateur est un candidat
+        if ($utilisateur->role === 'candidat') {
+
+           
+            // Utilisez des jointures pour récupérer les informations nécessaires
+            $candidature = Candidature::join('offre_emplois', 'candidatures.offre_emploi_id', '=', 'offre_emploi_id')
+                ->join('professions', 'offre_emplois.profession_id', '=', 'professions.id')
+                ->join('users', 'offre_emplois.user_id', '=', 'users.id')
+                ->select(
+                    'candidatures.dateSoum',
+                    'professions.nom_prof as nom_profession',
+                    'offre_emplois.typeContrat as type_offre_emploi',
+                    'users.nom',
+                    'users.prenom',
+                    'offre_emplois.lieu',
+                    'offre_emplois.description'
+                )
+                ->get();
+
+                
+
+            return response()->json([
+                'status_code' => 200,
+                'status_messages' => 'Informations de candidature récupérées avec succès',
+                'data' => $candidature,
+            ]);
+        
+        
+        }
+   }
 }

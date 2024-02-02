@@ -18,6 +18,11 @@ class CandidatureFactory extends Factory
     {
         return [
             //
+            'dateSoum' => $this->faker->date,
+            'etatCan' => $this->faker->randomElement(['attente', 'accepter', 'rejeter']),
+            'user_id' =>1,
+            'offre_emploi_id' => 1,
+            
         ];
     }
 }

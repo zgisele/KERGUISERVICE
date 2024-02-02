@@ -18,6 +18,10 @@ class EvaluationFactory extends Factory
     {
         return [
             //
+            'appreciation' => $this->faker->sentence,
+            'user_id' =>1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

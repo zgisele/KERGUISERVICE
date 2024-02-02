@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-// use PHPUnit\Framework\TestCase;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Profession;
@@ -41,15 +40,19 @@ class ProfessionTest extends TestCase
 
     public function test_lister_les_professions()
     {
-        
-        $user = User::factory()->create([
-            'email'=>'admin@example.com',
-            'password'=>bcrypt('password'),
-            'role'=>'admin'
-        ]);
-        $token = JWTAuth::fromUser($user);
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->get('api/listeProfession');
+
+        $response = $this->get('api/listeProfession');
+
         $response->assertStatus(200);
+        
+        // $user = User::factory()->create([
+        //     'email'=>'admin@example.com',
+        //     'password'=>bcrypt('password'),
+        //     // 'role'=>'admin'
+        // ]);
+        // $token = JWTAuth::fromUser($user);
+        // $response = $this->withHeader('Authorization', 'Bearer ' . $token)->get('api/listeProfession');
+        // $response->assertStatus(200);
         
     }
 

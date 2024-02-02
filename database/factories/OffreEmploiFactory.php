@@ -30,12 +30,14 @@ class OffreEmploiFactory extends Factory
             'experienceMinimum' => $this->faker->word,
             'slaireMinimum' => $this->faker->randomNumber(5),
             'etat' => $this->faker->randomElement(['nouveau', 'invalide', 'archiver']),
-            'user_id' =>function () {
-                return factory(User::class)->create()->id;
-            },
-            'profession_id' =>function () {
-                return factory(Profession::class)->create()->id;
-            },
+            'user_id' =>1,
+            // function () {
+            //     return factory(User::class)->create()->id;
+            // },
+            'profession_id' =>1,
+            // function () {
+            //     return factory(Profession::class)->create()->id;
+            // },
         ];
     // });
 

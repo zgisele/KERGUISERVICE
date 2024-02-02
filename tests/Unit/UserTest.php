@@ -201,6 +201,14 @@ class UserTest extends TestCase
         $response->assertStatus(200);
        }
 
+       public function test_liste_candidat()
+       {
+   
+           $response = $this->get('api/listeDesCandidats');
+           $response->assertStatus(200);
+           
+       }
+
        
 
 }
