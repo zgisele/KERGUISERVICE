@@ -188,6 +188,19 @@ class UserTest extends TestCase
         $response->assertStatus(200);
        }
 
-    
+       public function test_orffre_par_employeur()
+       {
+        // Profession::factory()->create();
+        $user = User::factory()->create([
+            'email'=>'employeur@example.com',
+            'password'=>bcrypt('password'),
+            'role'=>'employeur' 
+        ]);
+        $token = JWTAuth::fromUser($user);
+        $response = $this->withHeader('Authorization', 'Bearer ' . $token)->get('api/chercheOffreParUser/1');
+        $response->assertStatus(200);
+       }
+
+       
 
 }
