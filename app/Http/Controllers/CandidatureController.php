@@ -32,9 +32,37 @@ class CandidatureController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function AffichagelisteDesCanditatureRecuParEmployeur()
     {
-        //
+
+        // Récupérer toutes les offres de l'employeur connecté
+        $offreEmploi = OffreEmploi::where('user_id', auth()->user()->id)->get();
+        $candidatures = Candidature::whereIn('offre_emploi_id',$offreEmploi->pluck('id'))
+            ->join('users', 'candidatures.user_id', '=', 'users.id')
+            ->join('professions', 'users.profession_id', '=', 'professions.id')
+            ->select(
+                'candidatures.dateSoum',
+                'candidatures.etatCan',
+                'users.nom',
+                'users.prenom',
+                'users.email',
+                'users.telephone',
+                'users.presentation',
+                'users.langueParler',
+                'users.civilite',
+                'users.experienceProf',
+                'users.lieu',
+                'professions.nom_prof'
+                
+            )
+            ->get();
+        return response()->json([
+            "status_code"=>200,
+            "status_messages"=>"Liste candidature reçu par l'employeur",
+            "data"=>$candidatures
+            ]);
+        
+    
     }
 
     /**
@@ -65,14 +93,11 @@ class CandidatureController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Candidature $candidature)
+    public function show()
     {
-        //
-        // $candidaturesUsers= Candidature::with('user')
-        // ->select('candidatures.dateSoum', 'candidatures.etatCan', 'users.nom')
-        // ->get();
-
-        $candidaturesUsers = Candidature::join('users', 'candidatures.user_id', '=', 'users.id')
+        
+           
+            $candidaturesUsers = Candidature::join('users', 'candidatures.user_id', '=', 'users.id')
             ->join('professions', 'users.profession_id', '=', 'professions.id')
             ->select(
                 'candidatures.dateSoum',
@@ -91,8 +116,9 @@ class CandidatureController extends Controller
             )
             ->get();
 
-        
-        return response()->json($candidaturesUsers);
+            // dd($candidaturesUsers);
+        return response()->json($candidaturesUsers );
+    // }
     }
 
     /**

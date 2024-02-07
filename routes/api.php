@@ -69,7 +69,8 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
         Route::get('chercheCandidatureParOffre/{OffreEmploi}', [OffreEmploiController::class, 'RecherCandidatureParOffre']);//T
        
 
-        Route::get('AfichageCandidature',[CandidatureController::class,'show']);//T
+        // Route::get('AfichageCandidature',[CandidatureController::class,'show']);//T
+        Route::get('AfichageCandidature',[CandidatureController::class,'AffichagelisteDesCanditatureRecuParEmployeur']);//T
         Route::put('ModifierAfichageCandidature/{candidature}', [CandidatureController::class, 'updateEtatCan']);//T
         Route::delete('SuppressionCandidature/{candidature}', [CandidatureController::class, 'SupprimerCandidature']);//T
 

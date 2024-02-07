@@ -207,7 +207,7 @@ public function RecherOffreParUser(User $user)
 
     public function listeCandidats()
     {
-        try {
+        // try {
             // Utilise la méthode where pour filtrer par rôle
             $candidats = User::where('role', 'candidat')->get();
 
@@ -216,13 +216,13 @@ public function RecherOffreParUser(User $user)
                 "status_messages" => "Liste des candidats récupérée avec succès",
                 "data" => $candidats
             ]);
-        } catch (Exception $e) {
-            return response()->json([
-                "status_code" => 500,
-                "status_messages" => "Erreur lors de la récupération de la liste des candidats",
-                "error" => $e->getMessage()
-            ]);
-        }
+        // } catch (Exception $e) {
+        //     return response()->json([
+        //         "status_code" => 500,
+        //         "status_messages" => "Erreur lors de la récupération de la liste des candidats",
+        //         "error" => $e->getMessage()
+        //     ]);
+        // }
 
 
 }

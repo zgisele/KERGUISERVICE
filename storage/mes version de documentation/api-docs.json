@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Your API Title",
+        "title": "Ker gui service",
         "description": "Your API Description",
         "version": "1.0.0"
     },
@@ -1319,7 +1319,24 @@
                         "name": "User-Agent",
                         "type": "string"
                     }
-                ]
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "": ""
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/user/deactivateCompteUser/{id}": {
