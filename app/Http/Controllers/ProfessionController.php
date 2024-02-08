@@ -89,10 +89,10 @@ class ProfessionController extends Controller
     {
         //
         try{
-        $request->validate([
-            "nom_prof"=>"required",
-            "description"=>"required"
-        ]);
+        // $request->validate([
+        //     "nom_prof"=>"required",
+        //     "description"=>"required"
+        // ]);
        
         $profession->nom_prof = $request->nom_prof;
         $profession->description = $request->description;

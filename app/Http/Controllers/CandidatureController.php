@@ -284,6 +284,7 @@ class CandidatureController extends Controller
                     'candidatures.dateSoum',
                     'professions.nom_prof as nom_profession',
                     'offre_emplois.typeContrat as type_offre_emploi',
+                    'users.id',
                     'users.nom',
                     'users.prenom',
                     'offre_emplois.lieu',

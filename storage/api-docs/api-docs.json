@@ -198,51 +198,6 @@
                 ]
             }
         },
-        "/api/listeCandidatureDeChaqueCandidat": {
-            "get": {
-                "summary": "Liste candidature  pour candidat",
-                "description": "",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Gestion candidature"
-                ],
-                "parameters": [
-                    {
-                        "in": "header",
-                        "name": "User-Agent",
-                        "type": "string"
-                    }
-                ]
-            }
-        },
         "/api/SuppressionCandidature/{candidature}": {
             "delete": {
                 "summary": "Supprimer Candidature",
@@ -352,7 +307,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
@@ -471,123 +426,6 @@
                         "type": "string"
                     }
                 ]
-            }
-        },
-        "/api/offres-emploi/{offreEmploi}": {
-            "put": {
-                "summary": "Archiver offre d'emploi",
-                "description": "",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Gestion Offre Emploi"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "offreEmploi",
-                        "type": "string"
-                    },
-                    {
-                        "in": "header",
-                        "name": "User-Agent",
-                        "type": "string"
-                    }
-                ]
-            }
-        },
-        "/api/chercheOffreParUser/{user}": {
-            "get": {
-                "summary": "Rechercher offre d'emploi par User",
-                "description": "",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Gestion Offre Emploi"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "user",
-                        "type": "string"
-                    },
-                    {
-                        "in": "header",
-                        "name": "User-Agent",
-                        "type": "string"
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "": {
-                                        "type": "string"
-                                    }
-                                }
-                            },
-                            "example": {
-                                "": ""
-                            }
-                        }
-                    }
-                }
             }
         },
         "/api/chercheCandidatureParOffre/{OffreEmploi}": {
@@ -794,7 +632,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
@@ -910,12 +748,12 @@
                                 }
                             },
                             "example": {
-                                "typeContrat": "offre 4",
+                                "typeContrat": "offre 5",
                                 "lieu": "Dakar",
                                 "description": "recherche d'un TOUT",
                                 "experienceMinimum": "1 ans experieces",
                                 "slaireMinimum": "30 000 fcfa",
-                                "profession_id": "4"
+                                "profession_id": "5"
                             }
                         }
                     }
@@ -1181,7 +1019,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
@@ -1269,57 +1107,12 @@
                                 }
                             },
                             "example": {
-                                "nom_prof": "Bonne",
+                                "nom_prof": "Nounou",
                                 "description": "soyer active"
                             }
                         }
                     }
                 }
-            }
-        },
-        "/api/listeDesCandidats": {
-            "get": {
-                "summary": "Liste des Candidats",
-                "description": "",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {},
-                                "example": ""
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Gestion User "
-                ],
-                "parameters": [
-                    {
-                        "in": "header",
-                        "name": "User-Agent",
-                        "type": "string"
-                    }
-                ]
             }
         },
         "/api/user/deactivateCompteUser/{id}": {
@@ -1372,7 +1165,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
@@ -2002,7 +1795,7 @@
                                 }
                             },
                             "example": {
-                                "email": "alphonsine@gmail.com",
+                                "email": "anselme@gmail.com",
                                 "password": "passer"
                             }
                         }
@@ -2320,22 +2113,22 @@
                                 }
                             },
                             "example": {
-                                "nom": "Alidedji",
-                                "prenom": "Alphosine",
+                                "nom": "NONFODJI",
+                                "prenom": "nadege",
                                 "imageDeProfil": {
                                     "type": "string",
                                     "format": "binary"
                                 },
-                                "email": "alphonsine@gmail.com",
+                                "email": "nadege@gmail.com",
                                 "password": "passer",
-                                "telephone": "785922114",
+                                "telephone": "785522114",
                                 "presentation": "Bienvenu",
                                 "langueParler": "Francais",
                                 "civilite": "femme",
                                 "experienceProf": "licence",
                                 "dateNaissance": "2000-02-14",
                                 "lieu": "dakar",
-                                "profession_id": "2",
+                                "profession_id": "1",
                                 "password_confirmation": "passer"
                             }
                         }
