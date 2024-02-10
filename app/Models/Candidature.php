@@ -21,4 +21,8 @@ class Candidature extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function offre_emplois()
+    {
+        return $this->belongsTo(OffreEmploi::class, 'offre_emploi_id');
+    }
 }

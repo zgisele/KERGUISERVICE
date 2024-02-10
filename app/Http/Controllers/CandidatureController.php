@@ -96,7 +96,6 @@ class CandidatureController extends Controller
     public function show()
     {
         
-           
             $candidaturesUsers = Candidature::join('users', 'candidatures.user_id', '=', 'users.id')
             ->join('professions', 'users.profession_id', '=', 'professions.id')
             ->select(
@@ -270,37 +269,18 @@ class CandidatureController extends Controller
     public function ListeCandidatureDeChaqueCandidat()
     {
         // Récupérez l'utilisateur actuellement authentifié
-        $utilisateur = Auth::user();
+        $utilisateur = Auth::id();
+        $candidatures = Candidature::with('offre_emplois')
+        ->where('user_id', $utilisateur)
+        ->get();
+         return response()->json([
+            'status_code' => 200,
+            'status_messages' => 'Informations de candidature récupérées avec succès',
+            'data' =>$candidatures,
 
-        // Assurez-vous que l'utilisateur est un candidat
-        if ($utilisateur->role === 'candidat') {
-
-           
-            // Utilisez des jointures pour récupérer les informations nécessaires
-            $candidature = Candidature::join('offre_emplois', 'candidatures.offre_emploi_id', '=', 'offre_emploi_id')
-                ->join('professions', 'offre_emplois.profession_id', '=', 'professions.id')
-                ->join('users', 'offre_emplois.user_id', '=', 'users.id')
-                ->select(
-                    'candidatures.dateSoum',
-                    'professions.nom_prof as nom_profession',
-                    'offre_emplois.typeContrat as type_offre_emploi',
-                    'users.id',
-                    'users.nom',
-                    'users.prenom',
-                    'offre_emplois.lieu',
-                    'offre_emplois.description'
-                )
-                ->get();
-
-                
-
-            return response()->json([
-                'status_code' => 200,
-                'status_messages' => 'Informations de candidature récupérées avec succès',
-                'data' => $candidature,
-            ]);
+        ]);
         
         
-        }
-   }
+    }
+          
 }

@@ -63,6 +63,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(OffreEmploi::class);
     }
+    public function profession()
+    {
+        return $this->belongsTo( Profession::class);
+    }
 
     /**
      * The attributes that should be cast.

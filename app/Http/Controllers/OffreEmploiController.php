@@ -19,13 +19,16 @@ class OffreEmploiController extends Controller
         //
     }
     public function liste()
-    {
-        //
+    {    
         try{
+            
+            $offresEmplois = OffreEmploi::with(['user', 'profession'])->get();
+
             return response()->json([
                 "status_code"=>200,
                 "status_messages"=>"Liste des offres d'emploi",
-                "data"=>OffreEmploi::all()
+                "data"=>$offresEmplois
+              
             ]);
         }catch(Exception $e){
 

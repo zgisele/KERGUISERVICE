@@ -207,22 +207,14 @@ public function RecherOffreParUser(User $user)
 
     public function listeCandidats()
     {
-        // try {
-            // Utilise la méthode where pour filtrer par rôle
-            $candidats = User::where('role', 'candidat')->get();
-
+           $candidats = User::where('role', 'candidat')->with(['profession'])->get();
+           
             return response()->json([
                 "status_code" => 200,
                 "status_messages" => "Liste des candidats récupérée avec succès",
                 "data" => $candidats
             ]);
-        // } catch (Exception $e) {
-        //     return response()->json([
-        //         "status_code" => 500,
-        //         "status_messages" => "Erreur lors de la récupération de la liste des candidats",
-        //         "error" => $e->getMessage()
-        //     ]);
-        // }
+       
 
 
 }
