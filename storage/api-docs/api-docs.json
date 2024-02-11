@@ -478,6 +478,73 @@
                 ]
             }
         },
+         "/api/offres-emploi/{offreEmploi}": {
+            "put": {
+                "summary": "Archiver offre emploi",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "L'offre d'emploi a été archivée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Gestion Offre Emploi"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "offreEmploi",
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "etat": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "typeContrat": "archiver"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/listeOffreEmploi": {
             "get": {
                 "summary": "Liste des offres d'emploi",
@@ -1010,12 +1077,8 @@
                         "in": "header",
                         "name": "User-Agent",
                         "type": "string"
-                    },
-                    {
-                        "in": "header",
-                        "name": "",
-                        "type": "string"
                     }
+    
                 ],
                 "requestBody": {
                     "content": {

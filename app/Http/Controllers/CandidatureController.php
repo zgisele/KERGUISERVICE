@@ -198,7 +198,6 @@ class CandidatureController extends Controller
             
             // Mettre à jour la candidature avec la nouvelle valeur etatCan
             $candidature->update(['etatCan' => $nouvelEtatCan]);
-
             // foreach ($candidatures as $candidature) {
 
 

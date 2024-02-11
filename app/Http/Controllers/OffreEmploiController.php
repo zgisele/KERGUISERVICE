@@ -204,6 +204,6 @@ class OffreEmploiController extends Controller
                 "status_messages" => "Erreur lors de l'archivage de l'offre d'emploi",
                 "error" => $e->getMessage()
             ]);
-        }
+        } 
     }
 }

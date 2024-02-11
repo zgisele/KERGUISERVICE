@@ -46,15 +46,15 @@ Route::group(["middleware" => ["auth:api"],], function(){
 
 Route::middleware(['auth:api','UserAdmin'])->group( function(){
     
-    Route::post("AjoutProfession", [ProfessionController::class, "store"]);//T
+    Route::post("AjoutProfession", [ProfessionController::class, "store"]);//T  /v
     Route::put('profession/edit/{profession}', [ProfessionController::class, 'update']);//T
-    Route::delete('profession/delete/{id}',[ProfessionController::class, 'delete']);//T
+    Route::delete('profession/delete/{id}',[ProfessionController::class, 'delete']);//T /v
 
-    Route::post('user/modificationAdmin',[ApiGestionUserController::class, 'updateAmin']);//T
-    Route::get('user/VoirEnsembleUser',[ApiGestionUserController::class, 'listeUser']);//T
-    Route::put('user/deactivateCompteUser/{id}',[ApiGestionUserController::class, 'deactivateCompte']);//T
-    Route::get('chercheUsersParProfession/{profession}', [ProfessionController::class, 'RecherUserParProfession']);//T
-    Route::get('chercheOffreParProfession/{profession}', [ProfessionController::class, 'RecherOffreEmploiParProfession']);//T
+    Route::post('user/modificationAdmin',[ApiGestionUserController::class, 'updateAmin']);//T  /v
+    Route::get('user/VoirEnsembleUser',[ApiGestionUserController::class, 'listeUser']);//T  /v
+    Route::put('user/deactivateCompteUser/{id}',[ApiGestionUserController::class, 'deactivateCompte']);//T /v
+    Route::get('chercheUsersParProfession/{profession}', [ProfessionController::class, 'RecherUserParProfession']);//T /v
+    Route::get('chercheOffreParProfession/{profession}', [ProfessionController::class, 'RecherOffreEmploiParProfession']);//T /v
     Route::put('offres-emploi/{offreEmploi}', [OffreEmploiController::class, 'archiver']);
    
 });
@@ -98,7 +98,7 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
 
 
     Route::get('listeOffreEmploi',[OffreEmploiController::class,'liste']);//T
-    Route::get('listeProfession',[ProfessionController::class,'liste']);//T
+    Route::get('listeProfession',[ProfessionController::class,'liste']);//T /v
     Route::get('listeDesCandidats',[ApiGestionUserController::class,'listeCandidats']);//T
 
      // Route::put('Candidature/edit/{Candidature}',[CandidatureController::class, 'update']);
