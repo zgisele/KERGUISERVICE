@@ -32,8 +32,9 @@ class ApiController extends Controller
            "prenom"=>"required",
            "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
         //    "email"=>"required|email|unique:users",
-           "password"=>"required",
-           "telephone"=>"required",
+           "password"=>"required|min:8",
+        //    "telephone"=>"required",
+           "telephone" => ["required", "regex:/^(70|75|76|77|78)[0-9]{7}$/"],
            "presentation"=>"required",
            "langueParler"=>"required",
            "civilite"=>"required",
@@ -104,8 +105,9 @@ class ApiController extends Controller
            "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
            "email"=>"required|email|unique:users",
         //    "motDePasse"=>"required",
-           "password"=>"required",
-           "telephone"=>"required",
+           "password"=>"required|min:8",
+        //    "telephone"=>"required|regex:/^(70|75|76|77|78)[0-9]{7}$/",
+            "telephone" => ["required", "regex:/^(70|75|76|77|78)[0-9]{7}$/"],
         //    "presentation"=>"required",
         //    "langueParler"=>"required",
         //    "civilite"=>"required",
@@ -144,8 +146,9 @@ class ApiController extends Controller
            "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
            "email"=>"required|email|unique:users",
         //    "motDePasse"=>"required",
-           "password"=>"required",
-           "telephone"=>"required",
+           "password"=>"required|min:8",
+        //    "telephone"=>"required",
+           "telephone" => ["required", "regex:/^(70|75|76|77|78)[0-9]{7}$/"],
         //    "presentation"=>"required",
         //    "langueParler"=>"required",
         //    "civilite"=>"required",
@@ -185,7 +188,8 @@ class ApiController extends Controller
         //  validation des donnes
         $request->validate([
             "email" => "required|email",
-            "password" => "required"
+            // "password" => "required"
+            "password" => "required|min:8"
         ]);
         //  dd($request);
         // JWTAuth

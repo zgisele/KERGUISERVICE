@@ -43,7 +43,7 @@ class ApiGestionUserController extends Controller
             "prenom"=>"required",
             "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
             // "email"=>"required|email|unique:users",
-            "password"=>"required",
+            "password"=>"required|min:8",
             "telephone"=>"required",
             "presentation"=>"required", 
             "langueParler"=>"required",
@@ -95,7 +95,7 @@ class ApiGestionUserController extends Controller
             "prenom"=>"required",
             "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
             // "email"=>"required|email|unique:users",
-            "password"=>"required",
+            "password"=>"required|min:8",
             "telephone"=>"required",
             "lieu"=>"required",
             // "statut"=>"required",
@@ -135,7 +135,7 @@ class ApiGestionUserController extends Controller
             "prenom"=>"required",
             "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
             // "email"=>"required|email|unique:users",
-            "password"=>"required",
+            "password"=>"required|min:8",
             "telephone"=>"required",
             "lieu"=>"required",
             // "statut"=>"required",
@@ -183,6 +183,23 @@ class ApiGestionUserController extends Controller
     }
 
 
+
+    public function activateCompte($id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            $user->update(['statut' => 'activer ']);
+
+            return response()->json(['message' => 'Compte activé avec succès'], 200);
+
+        }else {
+            
+            return response()->json(['message' => 'Utilisateur non trouvé'], 404);
+        }
+    }
+
+
 public function RecherOffreParUser(User $user)
 {
     // Récupérer la catégorie en fonction de l'id
@@ -217,5 +234,5 @@ public function RecherOffreParUser(User $user)
        
 
 
-}
+    }
 }

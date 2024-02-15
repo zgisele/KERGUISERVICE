@@ -35,7 +35,7 @@ Route::post("login", [ApiController::class, "login"]);//T
 
 
 
-Route::group(["middleware" => ["auth:api"],], function(){
+Route::group(["middleware" => ["CompteActive","auth:api"],], function(){
 
     Route::get("profile", [ApiController::class, "profile"]);//T
     Route::get("refresh", [ApiController::class, "refreshToken"]);
@@ -53,9 +53,11 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
     Route::post('user/modificationAdmin',[ApiGestionUserController::class, 'updateAmin']);//T  /v
     Route::get('user/VoirEnsembleUser',[ApiGestionUserController::class, 'listeUser']);//T  /v
     Route::put('user/deactivateCompteUser/{id}',[ApiGestionUserController::class, 'deactivateCompte']);//T /v
+    Route::put('user/activateCompteUser/{id}',[ApiGestionUserController::class, 'activateCompte']);
     Route::get('chercheUsersParProfession/{profession}', [ProfessionController::class, 'RecherUserParProfession']);//T /v
     Route::get('chercheOffreParProfession/{profession}', [ProfessionController::class, 'RecherOffreEmploiParProfession']);//T /v
     Route::put('offres-emploi/{offreEmploi}', [OffreEmploiController::class, 'archiver']);
+    Route::get('chercheOffreParUser/{user}', [ApiGestionUserController::class, 'RecherOffreParUser']);//T
    
 });
 
@@ -76,7 +78,7 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
 
         Route::post('user/modificationProfilEmployeur',[ApiGestionUserController::class, 'updateEmployeur']);//T
         Route::get('user/VoirProfilDesCandidat',[ApiGestionUserController::class, 'ProfilDesCandidat']);//T
-        Route::get('chercheOffreParUser/{user}', [ApiGestionUserController::class, 'RecherOffreParUser']);//T
+        // Route::get('chercheOffreParUser/{user}', [ApiGestionUserController::class, 'RecherOffreParUser']);//T
 
 
         Route::post("AjoutEvaluation", [EvaluationController::class, "store"]);//T

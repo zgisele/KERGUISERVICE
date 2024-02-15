@@ -269,7 +269,10 @@ class CandidatureController extends Controller
     {
         // Récupérez l'utilisateur actuellement authentifié
         $utilisateur = Auth::id();
-        $candidatures = Candidature::with('offre_emplois')
+        $candidatures = Candidature::with(['offre_emplois' => function ($query)
+        {  
+            $query->with('user');
+        },'offre_emplois.profession'])
         ->where('user_id', $utilisateur)
         ->get();
          return response()->json([
