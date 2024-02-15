@@ -55,9 +55,12 @@ class OffreEmploiController extends Controller
             "description"=>"required",
             "experienceMinimum"=>"required",
             "slaireMinimum"=>"required",
+            "image"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
+            "dateline"=>"required",
             // "slaireMinimum"=>"required",
             "profession_id"=>"required",
             ]);
+            $imagePath = $request->file('image')->store('images/profil', 'public');
             $user=User::find(auth()->user()->id);
             $OffreEmploi = new OffreEmploi();
             $OffreEmploi->typeContrat = $request->typeContrat;
@@ -65,6 +68,8 @@ class OffreEmploiController extends Controller
             $OffreEmploi->description= $request->description;
             $OffreEmploi->experienceMinimum = $request->experienceMinimum;
             $OffreEmploi->slaireMinimum= $request->slaireMinimum;
+            $OffreEmploi->image=$imagePath;
+            $OffreEmploi->dateline= $request->dateline;
             // $OffreEmploi->etat= $request->get('etat');
              $OffreEmploi->user_id = $user->id;
             $OffreEmploi->profession_id = $request->profession_id;
@@ -108,16 +113,21 @@ class OffreEmploiController extends Controller
             "description"=>"required",
             "experienceMinimum"=>"required",
             "slaireMinimum"=>"required",
+            "image"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
+            "dateline"=>"required",
             // "slaireMinimum"=>"required",
             "profession_id"=>"required",
             ]);
 
+            $imagePath = $request->file('image')->store('images/profil', 'public');
             $user=User::find(auth()->user()->id);
             $OffreEmploi->typeContrat = $request->typeContrat;
             $OffreEmploi->lieu=$request->lieu;
             $OffreEmploi->description= $request->description;
             $OffreEmploi->experienceMinimum = $request->experienceMinimum;
             $OffreEmploi->slaireMinimum= $request->slaireMinimum;
+            $OffreEmploi->image=$imagePath;
+            $OffreEmploi->dateline= $request->dateline;
             $OffreEmploi->user_id = $user->id;
             $OffreEmploi->profession_id = $request->profession_id;
             $OffreEmploi->update();

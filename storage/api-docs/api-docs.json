@@ -813,6 +813,13 @@
                                     "slaireMinimum": {
                                         "type": "string"
                                     },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "dateline": {
+                                        "type": "string"
+                                    },
                                     "profession_id": {
                                         "type": "string"
                                     }
@@ -824,6 +831,11 @@
                                 "description": "vous allez adorer",
                                 "experienceMinimum": "1 ans",
                                 "slaireMinimum": "200 mille",
+                                "image": {
+                                    "type": "string",
+                                    "format": "binary"
+                                },
+                                "dateline": "2024-04-01",
                                 "profession_id": "3"
                             }
                         }
@@ -904,6 +916,13 @@
                                     "slaireMinimum": {
                                         "type": "string"
                                     },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "dateline": {
+                                        "type": "string"
+                                    },
                                     "profession_id": {
                                         "type": "string"
                                     }
@@ -915,6 +934,11 @@
                                 "description": "recherche d'un TOUT",
                                 "experienceMinimum": "1 ans experieces",
                                 "slaireMinimum": "30 000 fcfa",
+                                "image": {
+                                    "type": "string",
+                                    "format": "binary"
+                                },
+                                "dateline": "2024-04-01",
                                 "profession_id": "5"
                             }
                         }
@@ -1184,6 +1208,10 @@
                                     "nom_prof": {
                                         "type": "string"
                                     },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
                                     "description": {
                                         "type": "string"
                                     }
@@ -1191,6 +1219,10 @@
                             },
                             "example": {
                                 "nom_prof": "developpement full stack",
+                                "image": {
+                                    "type": "string",
+                                    "format": "binary"
+                                },
                                 "description": "apprener le back et le front du developpement web"
                             }
                         }
@@ -1259,6 +1291,10 @@
                                     "nom_prof": {
                                         "type": "string"
                                     },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
                                     "description": {
                                         "type": "string"
                                     }
@@ -1266,6 +1302,10 @@
                             },
                             "example": {
                                 "nom_prof": "Nounou",
+                                "image": {
+                                    "type": "string",
+                                    "format": "binary"
+                                },
                                 "description": "soyer active"
                             }
                         }

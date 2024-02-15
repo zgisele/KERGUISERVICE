@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('description');
             $table->string('experienceMinimum');
             $table->string('slaireMinimum');
+            $table->string('image');
+            $table->date('dateline');
             $table->enum('etat',['nouveau','invalide','archiver']);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

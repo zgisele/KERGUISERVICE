@@ -52,10 +52,12 @@ class ProfessionController extends Controller
         // validation des donnes
         $request->validate([
             "nom_prof"=>"required",
+            "image"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
             "description"=>"required"
         ]);
         $profession= new Profession();
         $profession->nom_prof = $request->get('nom_prof');
+        $profession->image = $request->file('image')->store('images/profil', 'public');
         $profession->description = $request->get('description');
         $profession->save();
 
@@ -91,6 +93,7 @@ class ProfessionController extends Controller
         try{
         $request->validate([
             "nom_prof"=>"required",
+            "image"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
             "description"=>"required"
         ]);
        
@@ -98,6 +101,7 @@ class ProfessionController extends Controller
         // $profession->description = $request->description;
         $profession->update([
             "nom_prof" => $request->nom_prof,
+            "image" => $request->file('image')->store('images/profil', 'public'),
             "description" => $request->description,
         ]);
         return response()->json([
@@ -184,91 +188,5 @@ class ProfessionController extends Controller
 
 
 
-    // "/api/OffreEmploi/edit/{OffreEmploi}": {
-    //         "put": {
-    //             "summary": "Modifier offre emploi",
-    //             "description": "",
-    //             "responses": {
-    //                 "200": {
-    //                     "description": "OK",
-    //                     "content": {
-    //                         "application/json": {
-    //                             "schema": {},
-    //                             "example": ""
-    //                         }
-    //                     }
-    //                 },
-    //                 "404": {
-    //                     "description": "Not Found",
-    //                     "content": {
-    //                         "application/json": {
-    //                             "schema": {},
-    //                             "example": ""
-    //                         }
-    //                     }
-    //                 },
-    //                 "500": {
-    //                     "description": "Internal Server Error",
-    //                     "content": {
-    //                         "application/json": {
-    //                             "schema": {},
-    //                             "example": ""
-    //                         }
-    //                     }
-    //                 }
-    //             },
-    //             "tags": [
-    //                 "Gestion Offre Emploi"
-    //             ],
-    //             "parameters": [
-    //                 {
-    //                     "in": "path",
-    //                     "name": "OffreEmploi",
-    //                     "type": "string"
-    //                 },
-    //                 {
-    //                     "in": "header",
-    //                     "name": "User-Agent",
-    //                     "type": "string"
-    //                 }
-    //             ],
-    //             "requestBody": {
-    //                 "content": {
-    //                     "application/x-www-form-urlencoded": {
-    //                         "schema": {
-    //                             "type": "object",
-    //                             "properties": {
-    //                                 "typeContrat": {
-    //                                     "type": "string"
-    //                                 },
-    //                                 "lieu": {
-    //                                     "type": "string"
-    //                                 },
-    //                                 "description": {
-    //                                     "type": "string"
-    //                                 },
-    //                                 "experienceMinimum": {
-    //                                     "type": "string"
-    //                                 },
-    //                                 "slaireMinimum": {
-    //                                     "type": "string"
-    //                                 },
-    //                                 "profession_id": {
-    //                                     "type": "string"
-    //                                 }
-    //                             }
-    //                         },
-    //                         "example": {
-    //                             "typeContrat": "CDI",
-    //                             "lieu": "dakar",
-    //                             "description": "vous allez adorer",
-    //                             "experienceMinimum": "1 ans",
-    //                             "slaireMinimum": "200 mille",
-    //                             "profession_id": "3"
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     // },
+    
 }

@@ -17,6 +17,8 @@ class OffreEmploi extends Model
         'description',
         'experienceMinimum',
         'slaireMinimum',
+        'image',
+        'dateline',
         'etat',
         'user_id',
         'profession_id',

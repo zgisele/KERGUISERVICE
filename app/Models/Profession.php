@@ -15,6 +15,7 @@ class Profession extends Model
 
     protected $fillable = [
         'nom_prof',
+        'image',
         'description',
     ];
 
