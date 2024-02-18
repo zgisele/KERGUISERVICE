@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Profession;
 use App\Models\OffreEmploi;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProfessionResquest;
+use App\Http\Requests\UpdateProfessionResquest;
 
 class ProfessionController extends Controller
 {
@@ -47,14 +49,8 @@ class ProfessionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProfessionResquest $request)
     {
-        // validation des donnes
-        $request->validate([
-            "nom_prof"=>"required",
-            "image"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
-            "description"=>"required"
-        ]);
         $profession= new Profession();
         $profession->nom_prof = $request->get('nom_prof');
         $profession->image = $request->file('image')->store('images/profil', 'public');
@@ -87,16 +83,11 @@ class ProfessionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profession $profession)
+    public function update(UpdateProfessionResquest $request, Profession $profession)
     {
         //
         try{
-        $request->validate([
-            "nom_prof"=>"required",
-            "image"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
-            "description"=>"required"
-        ]);
-       
+             
         // $profession->nom_prof = $request->nom_prof;
         // $profession->description = $request->description;
         $profession->update([

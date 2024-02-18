@@ -39,18 +39,18 @@ class ApiGestionUserController extends Controller
         try{
         //
         $request->validate([
-            "nom"=>"required",
-            "prenom"=>"required",
-            "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
+            "nom"=>"required|max:30",
+            "prenom"=>"required|max:30",
+            "imageDeProfil"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
             // "email"=>"required|email|unique:users",
             "password"=>"required|min:8",
-            "telephone"=>"required",
-            "presentation"=>"required", 
-            "langueParler"=>"required",
+            "telephone"=>["required", "regex:/^(70|75|76|77|78)[0-9]{7}$/"],
+            "presentation"=>"required|max:255", 
+            "langueParler"=>"required|max:30",
             "civilite"=>"required",
-            "experienceProf"=>"required",
-            "dateNaissance"=>"required",
-            "lieu"=>"required",
+            "experienceProf"=>"required|integer|min:0",
+            "dateNaissance"=>"required|date",
+            "lieu"=>"required|max:30",
             // "statut"=>"required",
             // "role"=>"required",
             "profession_id"=>"required"
@@ -91,13 +91,13 @@ class ApiGestionUserController extends Controller
         try{
         //
         $request->validate([
-            "nom"=>"required",
-            "prenom"=>"required",
-            "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
+            "nom"=>"required|max:30",
+            "prenom"=>"required|max:30",
+            "imageDeProfil"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
             // "email"=>"required|email|unique:users",
             "password"=>"required|min:8",
-            "telephone"=>"required",
-            "lieu"=>"required",
+            "telephone"=>["required", "regex:/^(70|75|76|77|78)[0-9]{7}$/"],
+            "lieu"=>"required|max:30",
             // "statut"=>"required",
             // "role"=>"required",
             // "profession_id"=>"required"
@@ -131,13 +131,13 @@ class ApiGestionUserController extends Controller
         try{
         //
         $request->validate([
-            "nom"=>"required",
-            "prenom"=>"required",
-            "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
+            "nom"=>"required|max:30",
+            "prenom"=>"required|max:30",
+            "imageDeProfil"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
             // "email"=>"required|email|unique:users",
             "password"=>"required|min:8",
-            "telephone"=>"required",
-            "lieu"=>"required",
+            "telephone"=>["required", "regex:/^(70|75|76|77|78)[0-9]{7}$/"],
+            "lieu"=>"required|max:30",
             // "statut"=>"required",
             // "role"=>"required",
             // "profession_id"=>"required"

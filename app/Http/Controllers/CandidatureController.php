@@ -16,6 +16,7 @@ use PhpParser\Node\Stmt\ElseIf_;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\OffreEmploiController;
+use App\Http\Requests\UpdateCandidatureResquest;
 
 class CandidatureController extends Controller
 {
@@ -68,7 +69,7 @@ class CandidatureController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,$offre_emploi_id)
+    public function store($offre_emploi_id)
     {
         //
         try {
@@ -123,7 +124,7 @@ class CandidatureController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request,Candidature $candidature)
+    public function edit(Candidature $candidature)
     {
         // $nouvelEtatCan = $request->input('nouvel_etatCan');
 
@@ -184,14 +185,9 @@ class CandidatureController extends Controller
     {
         //
     }
-    public function updateEtatCan(Request $request, Candidature $candidature)
+    public function updateEtatCan(UpdateCandidatureResquest $request, Candidature $candidature)
     {
         try {
-        
-            // Valider la requête si nécessaire
-            $request->validate([
-                'etatCan' => 'required',
-            ]);
 
             // Récupérer la nouvelle valeur pour etatCan depuis la requête
             $nouvelEtatCan = $request->input('etatCan');

@@ -47,7 +47,7 @@ Route::group(["middleware" => ["CompteActive","auth:api"],], function(){
 Route::middleware(['auth:api','UserAdmin'])->group( function(){
     
     Route::post("AjoutProfession", [ProfessionController::class, "store"]);//T  /v
-    Route::put('profession/edit/{profession}', [ProfessionController::class, 'update']);//T
+    Route::post('profession/edit/{profession}', [ProfessionController::class, 'update']);//T
     Route::delete('profession/delete/{id}',[ProfessionController::class, 'delete']);//T /v
 
     Route::post('user/modificationAdmin',[ApiGestionUserController::class, 'updateAmin']);//T  /v
@@ -66,7 +66,7 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
     Route::middleware(['CompteActive','auth:api','UserEmployeur'])->group( function(){
       
         Route::post("AjoutOffreEmploi", [OffreEmploiController::class, "store"]);//T
-        Route::put('OffreEmploi/edit/{OffreEmploi}', [OffreEmploiController::class, 'update']);//T
+        Route::post('OffreEmploi/edit/{OffreEmploi}', [OffreEmploiController::class, 'update']);//T
         Route::delete('OffreEmploi/delete/{OffreEmploi}',[OffreEmploiController::class, 'destroy']);//T
         Route::get('chercheCandidatureParOffre/{OffreEmploi}', [OffreEmploiController::class, 'RecherCandidatureParOffre']);//T
        

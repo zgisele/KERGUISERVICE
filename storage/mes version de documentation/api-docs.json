@@ -1127,7 +1127,7 @@
             }
         },
         "/api/profession/edit/{profession}": {
-            "put": {
+            "post": {
                 "summary": "Modification profession",
                 "description": "",
                 "responses": {

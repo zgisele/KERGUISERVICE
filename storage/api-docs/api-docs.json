@@ -745,7 +745,7 @@
             }
         },
         "/api/OffreEmploi/edit/{OffreEmploi}": {
-            "put": {
+            "post": {
                 "summary": "Modifier offre emploi",
                 "description": "",
                 "responses": {
@@ -794,7 +794,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
@@ -1151,7 +1151,7 @@
             }
         },
         "/api/profession/edit/{profession}": {
-            "put": {
+            "post": {
                 "summary": "Modification profession",
                 "description": "",
                 "responses": {
@@ -1201,7 +1201,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "multipart/form-data": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
@@ -1408,7 +1408,7 @@
                 ],
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "application/x-www-form-urlencoded": { 
                             "schema": {
                                 "type": "object",
                                 "properties": {

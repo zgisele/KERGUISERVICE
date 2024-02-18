@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
 use Exception;
+use App\Http\Requests\StoreEvaluationRequest;
 
 class EvaluationController extends Controller
 {
@@ -27,12 +28,12 @@ class EvaluationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEvaluationRequest $request)
     {
         try{
-                $request->validate([
-                    'appreciation' => 'required',
-                ]);
+                // $request->validate([
+                //     'appreciation' => 'required',
+                // ]);
                 $user=auth()->user();
                 $evaluation = new Evaluation();
                 $evaluation->appreciation = $request->appreciation;

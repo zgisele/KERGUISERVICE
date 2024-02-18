@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Profession;
 use App\Models\OffreEmploi;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateOffreEmploiResquest;
+use App\Http\Requests\StoreOffreEmploiResquest;
 
 class OffreEmploiController extends Controller
 {
@@ -45,21 +47,10 @@ class OffreEmploiController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(StoreOffreEmploiResquest $request)
     {
         //
         try {
-            $request->validate([
-            "typeContrat"=>"required",
-            "lieu"=>"required",
-            "description"=>"required",
-            "experienceMinimum"=>"required",
-            "slaireMinimum"=>"required",
-            "image"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
-            "dateline"=>"required",
-            // "slaireMinimum"=>"required",
-            "profession_id"=>"required",
-            ]);
             $imagePath = $request->file('image')->store('images/profil', 'public');
             $user=User::find(auth()->user()->id);
             $OffreEmploi = new OffreEmploi();
@@ -104,21 +95,10 @@ class OffreEmploiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, OffreEmploi $OffreEmploi)
+    public function update(UpdateOffreEmploiResquest $request, OffreEmploi $OffreEmploi)
     {
         try {
-            $request->validate([
-            "typeContrat"=>"required",
-            "lieu"=>"required",
-            "description"=>"required",
-            "experienceMinimum"=>"required",
-            "slaireMinimum"=>"required",
-            "image"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
-            "dateline"=>"required",
-            // "slaireMinimum"=>"required",
-            "profession_id"=>"required",
-            ]);
-
+                    
             $imagePath = $request->file('image')->store('images/profil', 'public');
             $user=User::find(auth()->user()->id);
             $OffreEmploi->typeContrat = $request->typeContrat;
@@ -139,8 +119,7 @@ class OffreEmploiController extends Controller
 
             return response()->json($e);
             }
-       
-    }
+    }    
 
     /**
      * Remove the specified resource from storage.
