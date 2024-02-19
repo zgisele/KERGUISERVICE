@@ -81,8 +81,9 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
         // Route::get('chercheOffreParUser/{user}', [ApiGestionUserController::class, 'RecherOffreParUser']);//T
 
 
-        Route::post("AjoutEvaluation", [EvaluationController::class, "store"]);//T
-        Route::get("ListeEvaluation", [EvaluationController::class, "show"]);//T
+        // Route::post("AjoutEvaluation", [EvaluationController::class, "store"]);//T
+        Route::post("AjoutEvaluation/{id}", [EvaluationController::class, "store"]);//T
+        Route::get("ListeEvaluationEmployeur", [EvaluationController::class, "showEmployeur"]);
         Route::delete("SupprimerEvaluation/{evaluation}", [EvaluationController::class, "destroy"]);//T
 
        
@@ -102,6 +103,7 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
     Route::get('listeOffreEmploi',[OffreEmploiController::class,'liste']);//T
     Route::get('listeProfession',[ProfessionController::class,'liste']);//T /v
     Route::get('listeDesCandidats',[ApiGestionUserController::class,'listeCandidats']);//T
+    Route::get("ListeEvaluationCandidat", [EvaluationController::class, "showCandidat"]);//T
 
      // Route::put('Candidature/edit/{Candidature}',[CandidatureController::class, 'update']);
     //  Route::delete('Candidature/delete/{Candidature}',[CandidatureController::class, 'destroy']);

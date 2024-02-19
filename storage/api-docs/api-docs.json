@@ -82,7 +82,7 @@
                 ]
             }
         },
-        "/api/AjoutEvaluation": {
+        "/api/AjoutEvaluation/{id}": {
             "post": {
                 "summary": "Ajoute Commentaires",
                 "description": "",
@@ -129,6 +129,12 @@
                 ],
                 "parameters": [
                     {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string"
+                    },
+                    
+                    {
                         "in": "header",
                         "name": "User-Agent",
                         "type": "string"
@@ -153,9 +159,54 @@
                 }
             }
         },
-        "/api/ListeEvaluation": {
+        "/api/ListeEvaluationCandidat": {
             "get": {
-                "summary": "Liste commentaires",
+                "summary": "Liste commentaires candidat",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": ""
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Gestions commentaire"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/ListeEvaluationEmployeur": {
+            "get": {
+                "summary": "Liste commentaires employeur",
                 "description": "",
                 "responses": {
                     "200": {

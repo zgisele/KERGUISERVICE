@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
             $table->string('appreciation');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->unsignedBigInteger('user_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('employeur_id');
+            $table->unsignedBigInteger('candidat_id');
+            $table->foreign('employeur_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('candidat_id')->references('id')->on('users')->onDelete('cascade');   
             $table->timestamps();
         });
     }

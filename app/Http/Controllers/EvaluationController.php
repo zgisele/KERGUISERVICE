@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use App\Models\User;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
-use Exception;
 use App\Http\Requests\StoreEvaluationRequest;
 
 class EvaluationController extends Controller
@@ -28,21 +29,40 @@ class EvaluationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEvaluationRequest $request)
+    // public function store(StoreEvaluationRequest $request)
+    // {
+    //     try{
+                
+    //             $user=auth()->user();
+    //             $evaluation = new Evaluation();
+    //             $evaluation->appreciation = $request->appreciation;
+    //             $evaluation->user_id= $user->id;
+    //             $evaluation->save();
+
+    //             return response()->json([
+    //             "status_code"=>200,
+    //             "status_messages"=>"Commentaire ajouté avec succès",
+    //             ]);
+    //         }catch(Exception $e){
+    //             return response()->json($e);
+    //         }
+        
+    // }
+    public function store(StoreEvaluationRequest $request ,$id)
     {
         try{
-                // $request->validate([
-                //     'appreciation' => 'required',
-                // ]);
-                $user=auth()->user();
+                $Candidat=User::findOrFail($id);
+                $Employeur=auth()->user();
                 $evaluation = new Evaluation();
                 $evaluation->appreciation = $request->appreciation;
-                $evaluation->user_id= $user->id;
+                $evaluation->employeur_id= $Employeur->id;
+                $evaluation->candidat_id= $Candidat->id;
                 $evaluation->save();
 
                 return response()->json([
                 "status_code"=>200,
                 "status_messages"=>"Commentaire ajouté avec succès",
+                "DonnésCommentaire"=>$evaluation,
                 ]);
             }catch(Exception $e){
                 return response()->json($e);
@@ -53,10 +73,32 @@ class EvaluationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    // public function show()
+    // {
+    //     //
+    //     $evaluationUsers= Evaluation::join('users', 'evaluations.user_id', '=', 'users.id')
+    //         ->select('evaluations.appreciation',
+    //         'users.nom',
+    //         'users.prenom')
+    //         ->get();
+    //         return response()->json($evaluationUsers);
+    // }
+
+    public function showCandidat()
     {
         //
-        $evaluationUsers= Evaluation::join('users', 'evaluations.user_id', '=', 'users.id')
+        $evaluationUsers= Evaluation::join('users', 'evaluations.employeur_id', '=', 'users.id')
+            ->select('evaluations.appreciation',
+            'users.nom',
+            'users.prenom')
+            ->get();
+            return response()->json($evaluationUsers);
+    }
+
+    public function showEmployeur()
+    {
+        //
+        $evaluationUsers= Evaluation::join('users', 'evaluations.candidat_id', '=', 'users.id')
             ->select('evaluations.appreciation',
             'users.nom',
             'users.prenom')
