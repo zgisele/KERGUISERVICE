@@ -103,7 +103,7 @@ class ApiController extends Controller
         $request->validate([
            "nom"=>"required|max:30",
            "prenom"=>"required|max:30",
-           "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
+           "imageDeProfil"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
            "email"=>['required', 'email', 'unique:users', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|fr|org|sn)$/'],
         //    "motDePasse"=>"required",
            "password"=>"required|min:8",
@@ -144,7 +144,7 @@ class ApiController extends Controller
         $request->validate([
            "nom"=>"required|max:30",
            "prenom"=>"required|max:30",
-           "imageDeProfil"=>"required|mimes:jpeg,png,jpg|max:2048",
+           "imageDeProfil"=>"required|mimes:jpeg,png,jpg,avif|max:2048",
            "email"=>['required', 'email', 'unique:users', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|fr|org|sn)$/'],
         //    "motDePasse"=>"required",
            "password"=>"required|min:8",
