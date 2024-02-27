@@ -29,6 +29,8 @@ class OffreEmploiFactory extends Factory
             'description' =>$this->faker->paragraph,
             'experienceMinimum' => $this->faker->word,
             'slaireMinimum' => $this->faker->randomNumber(5),
+            'image' =>$this->faker->imageUrl(),
+            'dateline' =>$this->faker->date,
             'etat' => $this->faker->randomElement(['nouveau', 'invalide', 'archiver']),
             'user_id' =>1,
             // function () {

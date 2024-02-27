@@ -84,7 +84,7 @@ class EvaluationController extends Controller
     //         return response()->json($evaluationUsers);
     // }
 
-    public function showCandidat()
+    public function listeEvaluation()
     {
         //
         $evaluationUsers= Evaluation::join('users', 'evaluations.employeur_id', '=', 'users.id')
@@ -95,10 +95,23 @@ class EvaluationController extends Controller
             return response()->json($evaluationUsers);
     }
 
+    public function showCandidat()
+    {
+        //
+        $Candidat= auth()->user();
+        $evaluationUsers= Evaluation::where('candidat_id', $Candidat->id)->join('users', 'evaluations.employeur_id', '=', 'users.id')
+            ->select('evaluations.appreciation',
+            'users.nom',
+            'users.prenom')
+            ->get();
+            return response()->json($evaluationUsers);
+    }
+
     public function showEmployeur()
     {
         //
-        $evaluationUsers= Evaluation::join('users', 'evaluations.candidat_id', '=', 'users.id')
+        $Employeur= auth()->user();
+        $evaluationUsers= Evaluation::where('employeur_id', $Employeur->id)->join('users', 'evaluations.candidat_id', '=', 'users.id')
             ->select('evaluations.appreciation',
             'users.nom',
             'users.prenom')

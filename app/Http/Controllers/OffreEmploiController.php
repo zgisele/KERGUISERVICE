@@ -39,6 +39,26 @@ class OffreEmploiController extends Controller
         }
     }
 
+
+    public function historieOffreEmployeur()
+    {    
+        try{
+            $Employeur= auth()->user();
+            $offresEmplois= OffreEmploi::where('user_id', $Employeur->id)->with(['user', 'profession'])->get();
+
+            return response()->json([
+                "status_code"=>200,
+                "status_messages"=>"Liste des offres d'emploi",
+                "data"=>$offresEmplois
+              
+            ]);
+        }catch(Exception $e){
+
+            response()->json($e);
+
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */

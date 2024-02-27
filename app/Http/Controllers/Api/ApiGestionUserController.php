@@ -4,8 +4,15 @@ namespace App\Http\Controllers\Api;
 use Exception;
 use App\Models\User;
 use App\Models\OffreEmploi;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InitialisationMotDePasse;
+use App\Http\Requests\UpdateMotDePasse;
+use App\Http\Requests\ModifierLePasse;
 
 class ApiGestionUserController extends Controller
 {
@@ -165,6 +172,73 @@ class ApiGestionUserController extends Controller
         }
          
     }
+
+
+    public function updateMotDePasse(UpdateMotDePasse $request)
+    { 
+        
+        $email = $request->input('email');
+        $user=User::where('email',$email)->first();
+
+        if ($user) {
+            // Génère un token de réinitialisation de mot de passe
+            $token = Str::random(8);
+            // Stocke le token de réinitialisation dans la base de données pour l'utilisateur
+            $user->reset_password_token = $token;
+            $expire = now()->addMinutes(2);
+            $user->reset_password_token_expire = $expire;
+          
+            // dd($user);
+            $user->update(
+                // [
+                // 'reset_password_token' => $token ,
+                // 'reset_password_token_expire' => $expire
+            // ]
+        );
+            // Construit le lien de réinitialisation avec le token généré
+            $lien = url("/reset-password?token=$token");
+            
+            Mail::to($user->email)->send(new  InitialisationMotDePasse ($user,$lien));
+
+            return response()->json(['message' => 'Un email de réinitialisation a été envoyé à votre adresse.'], 200);
+        }
+        else {
+            return response()->json([
+                "status_code"=>422,
+                "status_messages"=>"Adresse email non trouvée",
+                ]);
+            
+        }
+         
+    }
+
+    public function showResetForm(Request $request)
+    {
+        // Récupérer le jeton de réinitialisation de mot de passe depuis l'URL
+        $token = $request->query('token');
+
+        return view('reset-password', ['token' => $token]);
+    }
+
+    public function ModifierLePasse(ModifierLePasse $request)
+    {
+        //
+        try{
+
+            $token = $request->query('token');
+            $user = User::where('reset_password_token',$token)->first();
+            $user->password = Hash::make($request->password);
+            $user->update();
+            return response()->json([
+                "status_code"=>200,
+                "status_messages"=>"Modification de mot de passe reussir",
+                ]);
+    }catch(Exception $e){
+
+        return response()->json($e);
+    }
+}
+
 
     
     public function deactivateCompte($id)

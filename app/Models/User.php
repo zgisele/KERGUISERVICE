@@ -39,6 +39,8 @@ class User extends Authenticatable implements JWTSubject
         'statut',
         'role',
         'profession_id',
+        'reset_password_token',
+        'reset_password_token_expire',
     ];
 
     /**

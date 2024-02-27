@@ -19,6 +19,7 @@ class ProfessionFactory extends Factory
         return [
             //
             'nom_prof' =>$this->faker->unique()->word,
+            'image' =>$this->faker->imageUrl(),
             'description' =>$this->faker->sentence,
         ];
     }
