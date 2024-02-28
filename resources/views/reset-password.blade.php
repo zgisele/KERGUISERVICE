@@ -30,16 +30,27 @@
         }
         .content {
             padding: 20px;
+            text-align: center;
+        }
+        .ajustement {
+            /* margin-left: auto; */
+            margin-top: 10px;
+        }
+        button {
+            /* margin-left: auto; */
+            color:white;
+            background-color:green;
         }
     </style>
+    <script>
+    
+</script>
 </head>
 <body>
     <div class="container">
-        
-        <img src="{{ asset('images/logo.jpg') }}" >
 
         <div class="header">
-            <h1>Réinitialisation de votre mot de passe</h1>
+            <h1>Réinitialisation mot de passe</h1>
         </div>
         <div class="content">
         
@@ -47,28 +58,26 @@
             <h3>Modification de mot de passe</h3>
             <!-- resources/views/auth/reset-password.blade.php -->
 
-                <form method="POST" action="{{route('user.ModifierLePasse')}}">
-                    @csrf
-                    <!-- <input type="hidden" name="token" value="{{ $token }}"> -->
+                <form method="POST" action="{{ route('user.ModifierLePasse') }}" >
+                
+                    @csrf 
                     
-                    <!-- <div>
-                        <label for="email">Adresse e-mail</label>
-                        <input id="email" type="email" name="email" required autofocus>
-                    </div> -->
-
-                    <div>
-                        <label for="password">Nouveau mot de passe</label>
-                        <input id="password" type="password" name="password" required>
+                    <div class="ajustement">
+                        <label for="password" class="form-label" class="container mt-4">Nouveau mot de passe</label><br>
+                        <input id="password" type="password" name="password" class="form-control mb-3" placeholder="Entrer nouveau mot de passe" style="width: 300px;height: 40px;">
                     </div>
 
-                    <div>
-                        <label for="password_confirmation">Confirmer le mot de passe</label>
-                        <input id="password_confirmation" type="password" name="password_confirmation" required>
+                    <div class="ajustement">
+                        <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label><br>
+                        <input id="password_confirmation" type="password" name="password_confirmation" class="form-control mb-3" placeholder="Confirmation mot de passe" style="width: 300px;height: 40px;">
                     </div>
 
-                    <div>
-                        <button type="submit">
-                            Réinitialiser le mot de passe
+                    <input type="hidden" value="{{request('reset_password_token')}}" name="token">
+
+
+                    <div class="ajustement">
+                        <button type="submit" style="width: 310px;height: 40px;" >
+                            Modifier
                         </button>
                     </div>
                 </form>
@@ -76,5 +85,6 @@
             
         </div>
     </div>
+    <script src="validation.js"></script>
 </body>
 </html>

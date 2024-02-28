@@ -31,7 +31,10 @@ Route::post("register", [ApiController::class, "register"]);//T X
 Route::post("regiserEmployeur", [ApiController::class, "register_Employeur"]);//T X  
 Route::post("regiserAdmin", [ApiController::class, "register_Admin"]);//T X
 Route::post("login", [ApiController::class, "login"]);//TX
-
+Route::get('/reset-password/{reset_password_token}',[ApiGestionUserController::class, 'showResetForm'])->name('reset-password');
+Route::post('user/ModifierLePasse',[ApiGestionUserController::class, 'ModifierLePasse'])->name('user.ModifierLePasse');
+// <!-- <form method="POST" action="{{ route('user.ModifierLePasse',['reset_password_token'=>$reset_password_token]) }}"> -->
+// <form method="POST" action="{{ route('user.ModifierLePasse') }}">
 
 
 
@@ -40,8 +43,7 @@ Route::group(["middleware" => ["CompteActive","auth:api"],], function(){
     Route::get("profile", [ApiController::class, "profile"]);//x
     Route::get("refresh", [ApiController::class, "refreshToken"]);
     Route::get("logout", [ApiController::class, "logout"]);//TX
-    Route::post('user/ModifierLePasse',[ApiGestionUserController::class, 'ModifierLePasse']);
-    Route::get('/reset-password',[ApiGestionUserController::class, 'showResetForm'])->name('reset-password');
+       
 
 
 });
@@ -118,6 +120,7 @@ Route::middleware(['auth:api','UserAdmin'])->group( function(){
 
     //liste des commantaire page d'accueil
     Route::get("ListeEvaluation", [EvaluationController::class, "listeEvaluation"]);//T
+    Route::get("ListeEvaluationParCandidat", [EvaluationController::class, "showCandidat"]);
 
      // Route::put('Candidature/edit/{Candidature}',[CandidatureController::class, 'update']);
     //  Route::delete('Candidature/delete/{Candidature}',[CandidatureController::class, 'destroy']);

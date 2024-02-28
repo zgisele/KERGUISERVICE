@@ -25,7 +25,7 @@ class ModifierLePasse extends FormRequest
     {
         return [
             //
-            "password" => "required|min:8",
+            "password" => "required|min:8|confirmed",
         ];
     }
 
@@ -47,6 +47,7 @@ class ModifierLePasse extends FormRequest
         return [
             'password.required' => 'Le champ mot de passe est requis.',
             'password.min' => 'Le champ mot de passe doit contenir au moins 8 caractères.',
+            'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
             
         ];
      }

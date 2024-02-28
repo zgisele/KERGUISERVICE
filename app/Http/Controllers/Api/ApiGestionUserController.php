@@ -182,21 +182,18 @@ class ApiGestionUserController extends Controller
 
         if ($user) {
             // Génère un token de réinitialisation de mot de passe
-            $token = Str::random(8);
+            // $token = Str::random(8);
+            $token= config('jwt.secret');
             // Stocke le token de réinitialisation dans la base de données pour l'utilisateur
             $user->reset_password_token = $token;
             $expire = now()->addMinutes(2);
             $user->reset_password_token_expire = $expire;
           
-            // dd($user);
-            $user->update(
-                // [
-                // 'reset_password_token' => $token ,
-                // 'reset_password_token_expire' => $expire
-            // ]
-        );
+           
+            $user->update();
             // Construit le lien de réinitialisation avec le token généré
-            $lien = url("/reset-password?token=$token");
+            // $lien = url("/reset-password?token=$token");
+            $lien = route('reset-password', ['reset_password_token' => $token]);
             
             Mail::to($user->email)->send(new  InitialisationMotDePasse ($user,$lien));
 
@@ -212,27 +209,27 @@ class ApiGestionUserController extends Controller
          
     }
 
-    public function showResetForm(Request $request)
+    public function showResetForm()
     {
-        // Récupérer le jeton de réinitialisation de mot de passe depuis l'URL
-        $token = $request->query('token');
-
-        return view('reset-password', ['token' => $token]);
+        
+        return view('reset-password');
     }
 
     public function ModifierLePasse(ModifierLePasse $request)
     {
-        //
+        
         try{
 
-            $token = $request->query('token');
-            $user = User::where('reset_password_token',$token)->first();
+             $reset_password_token = $request->token;
+            $user = User::where('reset_password_token', $reset_password_token )->first();
             $user->password = Hash::make($request->password);
-            $user->update();
-            return response()->json([
-                "status_code"=>200,
-                "status_messages"=>"Modification de mot de passe reussir",
-                ]);
+            $user->save();
+            
+            return redirect()->back()->with('success', "Modification de mot de passe réussie.");
+            // return response()->json([
+            //     "status_code"=>200,
+            //     "status_messages"=>"Modification de mot de passe reussir",
+            //     ]);
     }catch(Exception $e){
 
         return response()->json($e);
