@@ -37,7 +37,6 @@ class ProfessionTest extends TestCase
         
     }
 
-
     public function test_lister_les_professions()
     {
 

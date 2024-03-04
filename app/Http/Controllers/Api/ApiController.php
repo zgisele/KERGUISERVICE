@@ -44,7 +44,8 @@ class ApiController extends Controller
            "lieu"=>"required|max:30",
         //    "statut"=>"required",
         //    "role"=>"required",
-           "profession_id"=>"required"
+           "profession_id"=>"required",
+           'password_confirmation' => 'required|same:password',
         ]);
 
         //  Model Utilisateur
@@ -117,6 +118,7 @@ class ApiController extends Controller
         //    "dateNaissance"=>"required",
            "lieu"=>"required|max:30",
         //    "profession_id"=>"required"
+            'password_confirmation' => 'required|same:password',
         ]);
 
         // Model Utilisateur
@@ -159,6 +161,7 @@ class ApiController extends Controller
         //    "dateNaissance"=>"required",
            "lieu"=>"required|max:30",
         //    "profession_id"=>"required"
+            'password_confirmation' => 'required|same:password',
         ]);
 
         //  Model Utilisateur
