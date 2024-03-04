@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     confirm_password.onkeyup = validatePassword;
 });
 
-
+<script src="validation.js"></script>
 // var mpd1 = document.querySelector(".mpd1");
 // var mpd2 = document.querySelector(".mpd2");
 // mpd2.onkeyup = function () {
@@ -25,3 +25,17 @@ document.addEventListener("DOMContentLoaded", function () {
 //     message_error.innerText = "";
 //   }
 // };
+
+function showSuccessAlert(message) {
+    var successAlert = document.getElementById("success-alert");
+    successAlert.style.display = "block";
+    successAlert.innerText = message;
+}
+
+function showErrorAlert(message) {
+    var errorAlert = document.getElementById("error-alert");
+    errorAlert.style.display = "block";
+    errorAlert.innerText = message;
+}
+
+

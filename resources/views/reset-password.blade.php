@@ -41,6 +41,10 @@
             color:white;
             background-color:green;
         }
+        .error {
+            color: red;
+        }
+        
     </style>
     <script>
     
@@ -61,7 +65,6 @@
                 <form method="POST" action="{{ route('user.ModifierLePasse') }}" >
                 
                     @csrf 
-                    
                     <div class="ajustement">
                         <label for="password" class="form-label" class="container mt-4">Nouveau mot de passe</label><br>
                         <input id="password" type="password" name="password" class="form-control mb-3" placeholder="Entrer nouveau mot de passe" style="width: 300px;height: 40px;">
@@ -70,10 +73,9 @@
                     <div class="ajustement">
                         <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label><br>
                         <input id="password_confirmation" type="password" name="password_confirmation" class="form-control mb-3" placeholder="Confirmation mot de passe" style="width: 300px;height: 40px;">
-                    </div>
+                    </div>   
 
                     <input type="hidden" value="{{request('reset_password_token')}}" name="token">
-
 
                     <div class="ajustement">
                         <button type="submit" style="width: 310px;height: 40px;" >
@@ -81,10 +83,36 @@
                         </button>
                     </div>
                 </form>
+                @if(Session::has('success'))
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                    </div>
+                 @endif
 
+                @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('error') }}
+                    </div>
+                 @endif
             
         </div>
     </div>
-    <script src="validation.js"></script>
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            var password = document.getElementById("password"),
+                confirm_password = document.getElementById("password_confirmation");
+
+            function validatePassword() {
+                if (password.value != confirm_password.value) {
+                    confirm_password.setCustomValidity("Les mots de passe ne correspondent pas");
+                } else {
+                    confirm_password.setCustomValidity('');
+                }
+            }
+
+            password.onchange = validatePassword;
+            confirm_password.onkeyup = validatePassword;
+        });
+    </script>
 </body>
 </html>

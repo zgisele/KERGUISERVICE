@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\InitialisationMotDePasse;
 use App\Http\Requests\UpdateMotDePasse;
 use App\Http\Requests\ModifierLePasse;
+use Illuminate\Support\Facades\Session;
 
 class ApiGestionUserController extends Controller
 {
@@ -224,17 +225,20 @@ class ApiGestionUserController extends Controller
             $user = User::where('reset_password_token', $reset_password_token )->first();
             $user->password = Hash::make($request->password);
             $user->save();
-            
-            return redirect()->back()->with('success', "Modification de mot de passe réussie.");
+            Session::flash('success', "Modification de mot de passe réussie.");
+            return redirect()->back();
+            // ->with('success', "Modification de mot de passe réussie.");
             // return response()->json([
             //     "status_code"=>200,
             //     "status_messages"=>"Modification de mot de passe reussir",
             //     ]);
-    }catch(Exception $e){
-
-        return response()->json($e);
+        }catch(Exception $e){
+            Session::flash('error', $e->getMessage());
+            return redirect()->back();
+            //return response()->json($e);
+            // return back()->withErrors(['Erreur',$e]);
+        }
     }
-}
 
 
     

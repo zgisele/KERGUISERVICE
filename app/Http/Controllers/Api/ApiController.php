@@ -63,7 +63,8 @@ class ApiController extends Controller
         $user->civilite= $request->get('civilite');
         $user->experienceProf= $request->get('experienceProf');
         $user->dateNaissance= $request->get('dateNaissance');
-
+        $user->statut="activer";
+        $user->role = "candidat";
         $user->lieu= $request->get('lieu');
         $user->profession_id= $request->get('profession_id');
        
@@ -129,6 +130,7 @@ class ApiController extends Controller
         $user->password= $request->get('password');
         $user->telephone= $request->get('telephone');
         $user->lieu= $request->get('lieu');
+        $user->statut="activer";
         $user->role="employeur";
         $user->save();
 
@@ -170,6 +172,7 @@ class ApiController extends Controller
         $user->password= $request->get('password');
         $user->telephone= $request->get('telephone');
         $user->lieu= $request->get('lieu');
+        $user->statut="activer";
         $user->role="admin";
         $user->save();
 
@@ -179,9 +182,6 @@ class ApiController extends Controller
             "message" => "Utilisateur enregistrer avec succes"
         ]);
     }
-
-
-
 
     //  Autentification de l'utilisateur (POST, formdata)
     public function login(Request $request){
@@ -242,7 +242,8 @@ class ApiController extends Controller
         ]);
     }
      // Deconnexion de Utilisateur (GET)
-     public function logout(){
+    public function logout()
+    {
         
         auth()->logout();
 
@@ -347,3 +348,4 @@ class ApiController extends Controller
 
     
 }
+ 
